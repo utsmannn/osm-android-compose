@@ -1,6 +1,5 @@
 package com.utsman.osmandcompose
 
-import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.Polyline
 
 internal class PolylineNode(

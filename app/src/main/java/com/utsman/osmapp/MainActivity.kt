@@ -32,7 +32,9 @@ import androidx.compose.ui.unit.dp
 import com.utsman.osmandcompose.MapProperties
 import com.utsman.osmandcompose.Marker
 import com.utsman.osmandcompose.OpenStreetMap
+import com.utsman.osmandcompose.Polygon
 import com.utsman.osmandcompose.Polyline
+import com.utsman.osmandcompose.PolylineCap
 import com.utsman.osmandcompose.ZoomButtonVisibility
 import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.rememberMarkerState
@@ -67,6 +69,8 @@ class MainActivity : ComponentActivity() {
 fun MarkerPage() {
     val depokState = rememberMarkerState(geoPoint = GeoPoint(-6.3970066, 106.8224316))
     val jakartaState = rememberMarkerState(geoPoint = GeoPoint(-6.1907982, 106.8315909))
+    val depokState2 = rememberMarkerState(geoPoint = GeoPoint(-6.3729963,106.75806))
+
     val cameraState = rememberCameraState {
         geoPoint = depokState.geoPoint
         zoom = 12.0
@@ -118,6 +122,21 @@ fun MarkerPage() {
         TilesOverlay(tileProvider, context)
     }
 
+    val polygonHoles = remember {
+        val hole1 = listOf(
+            GeoPoint(-6.3690298,106.7791744),
+            GeoPoint(-6.3393337,106.8030781),
+            GeoPoint(-6.3537767,106.7629521)
+        )
+
+        val hole2 = listOf(
+            GeoPoint(-6.3083577,106.7829421),
+            GeoPoint(-6.3105647,106.7866221)
+        )
+
+        listOf(hole1, hole2)
+    }
+
     SideEffect {
         mapProperties = mapProperties
             .copy(isTilesScaledToDpi = true)
@@ -164,7 +183,8 @@ fun MarkerPage() {
 
             Polyline(
                 geoPoints = listOf(depokState.geoPoint, jakartaState.geoPoint),
-                color = Color.Cyan
+                color = Color.Cyan,
+                cap = PolylineCap.ROUND
             ) {
                 Column(
                     modifier = Modifier
@@ -175,6 +195,13 @@ fun MarkerPage() {
                     Text(text = it.snippet)
                 }
             }
+
+            Polygon(
+                geoPoints = listOf(depokState.geoPoint, GeoPoint(-6.2076517,106.7439701), depokState2.geoPoint),
+                geoPointHoles = polygonHoles,
+                color = Color.Blue,
+                outlineColor = Color.Green
+            )
         }
 
         Column(
