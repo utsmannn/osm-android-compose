@@ -7,7 +7,6 @@ import org.osmdroid.events.ScrollEvent
 import org.osmdroid.events.ZoomEvent
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.MapEventsOverlay
-import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 
 internal class MapPropertiesNode(
     val mapViewComposed: OsmMapView,
