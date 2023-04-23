@@ -14,8 +14,13 @@ class OverlayManagerState(private var _overlayManager: OverlayManager?) {
         get() = _overlayManager
             ?: throw IllegalStateException("Invalid Map attached!, please add other overlay in OpenStreetMap#onFirstLoadListener")
 
+    private var _mapView: MapView? = null
     fun setMap(mapView: MapView) {
         _overlayManager = mapView.overlayManager
+    }
+
+    fun getMap(): MapView {
+        return _mapView ?: throw IllegalStateException("Invalid Map attached!")
     }
 
     companion object {

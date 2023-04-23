@@ -10,10 +10,12 @@ data class MapProperties(
     val minZoomLevel: Double = 6.0,
     val maxZoomLevel: Double = 29.0,
     val isFlingEnable: Boolean = true,
+    val isEnableRotationGesture: Boolean = false,
     val isUseDataConnection: Boolean = true,
     val isTilesScaledToDpi: Boolean = false,
     val tileSources: ITileSource? = null,
-    val overlayManager: OverlayManager? = null
+    val overlayManager: OverlayManager? = null,
+    val zoomButtonVisibility: ZoomButtonVisibility = ZoomButtonVisibility.ALWAYS
 )
 
 val DefaultMapProperties = MapProperties()

@@ -14,7 +14,6 @@ internal class MapApplier(
     }
 
     override fun insertTopDown(index: Int, instance: OsmAndNode) {
-
     }
 
     override fun move(from: Int, to: Int, count: Int) {

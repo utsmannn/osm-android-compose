@@ -80,6 +80,10 @@ interface OsmAndroidScope
 
 // public enum Visibility {ALWAYS, NEVER, SHOW_AND_FADEOUT}
 
+enum class ZoomButtonVisibility {
+    ALWAYS, NEVER, SHOW_AND_FADEOUT
+}
+
 @Composable
 @OsmAndroidComposable
 fun OpenStreetMap(
@@ -107,8 +111,6 @@ fun OpenStreetMap(
 
     val mapProperties by rememberUpdatedState(properties)
 
-
-
     val parentComposition = rememberCompositionContext()
     val currentContent by rememberUpdatedState(content)
 
@@ -124,9 +126,7 @@ fun OpenStreetMap(
     AndroidView(
         modifier = modifier,
         factory = {
-            mapView.also {
-                it.zoomController.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
-            }
+            mapView
         },
         update = {
             it.controller.animateTo(

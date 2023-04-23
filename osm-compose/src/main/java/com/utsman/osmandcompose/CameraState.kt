@@ -90,6 +90,10 @@ class CameraState(cameraProperty: CameraProperty) {
         pClockwise: Boolean = false
     ) = getController().animateTo(point, pZoom, pSpeed, pOrientation, pClockwise)
 
+    fun normalizeRotation() {
+        getController().animateTo(geoPoint, zoom, null, 0f)
+    }
+
     companion object {
         val Saver: Saver<CameraState, CameraProperty> = Saver(
             save = { it.prop },

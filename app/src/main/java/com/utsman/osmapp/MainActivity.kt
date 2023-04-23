@@ -30,9 +30,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.utsman.osmandcompose.MapProperties
-import com.utsman.osmandcompose.OpenStreetMap
-import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.Marker
+import com.utsman.osmandcompose.OpenStreetMap
+import com.utsman.osmandcompose.Polyline
+import com.utsman.osmandcompose.ZoomButtonVisibility
+import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.rememberMarkerState
 import com.utsman.osmandcompose.rememberOverlayManagerState
 import com.utsman.osmapp.ui.theme.OsmAndroidComposeTheme
@@ -67,6 +69,7 @@ fun MarkerPage() {
     val jakartaState = rememberMarkerState(geoPoint = GeoPoint(-6.1907982, 106.8315909))
     val cameraState = rememberCameraState {
         geoPoint = depokState.geoPoint
+        zoom = 12.0
     }
 
     val overlayManagerState = rememberOverlayManagerState()
@@ -117,11 +120,11 @@ fun MarkerPage() {
 
     SideEffect {
         mapProperties = mapProperties
-            .copy(minZoomLevel = 12.0)
             .copy(isTilesScaledToDpi = true)
             .copy(tileSources = TileSourceFactory.MAPNIK)
+            .copy(isEnableRotationGesture = true)
+            .copy(zoomButtonVisibility = ZoomButtonVisibility.NEVER)
     }
-
 
     Box {
         OpenStreetMap(
@@ -140,7 +143,6 @@ fun MarkerPage() {
             onFirstLoadListener = {
                 println("on loaded ... ")
                 overlayManagerState.overlayManager.add(CopyrightOverlay(context))
-                //overlayManagerState.overlayManager.add(tileOverlay)
             }
         ) {
 
@@ -154,6 +156,20 @@ fun MarkerPage() {
                     modifier = Modifier
                         .size(100.dp)
                         .background(color = Color.Gray, shape = RoundedCornerShape(12.dp))
+                ) {
+                    Text(text = it.title)
+                    Text(text = it.snippet)
+                }
+            }
+
+            Polyline(
+                geoPoints = listOf(depokState.geoPoint, jakartaState.geoPoint),
+                color = Color.Cyan
+            ) {
+                Column(
+                    modifier = Modifier
+                        .size(100.dp)
+                        .background(color = Color.Red, shape = RoundedCornerShape(6.dp))
                 ) {
                     Text(text = it.title)
                     Text(text = it.snippet)
@@ -181,6 +197,13 @@ fun MarkerPage() {
                     depokState.rotation = depokState.rotation + 90f
                 }) {
                 Text(text = "rotasi")
+            }
+
+            Button(
+                onClick = {
+                    cameraState.normalizeRotation()
+                }) {
+                Text(text = "rotasi normal")
             }
         }
 

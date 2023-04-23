@@ -27,12 +27,10 @@ internal class MarkerNode(
     fun setupListeners() {
         marker.setOnMarkerClickListener { marker, _ ->
             val click = onMarkerClick.invoke(marker)
-            if (click) {
-                if (marker.isInfoWindowShown) {
-                    marker.closeInfoWindow()
-                } else {
-                    marker.showInfoWindow()
-                }
+            if (marker.isInfoWindowShown) {
+                marker.closeInfoWindow()
+            } else {
+                marker.showInfoWindow()
             }
             click
         }

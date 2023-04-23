@@ -22,6 +22,7 @@ fun Marker(
     title: String? = null,
     snippet: String? = null,
     onClick: (Marker) -> Boolean = { false },
+    id: String? = null,
     infoWindowContent: @Composable (InfoWindowData) -> Unit = {}
 ) {
 
@@ -31,16 +32,16 @@ fun Marker(
     ComposeNode<MarkerNode, MapApplier>(
         factory = {
             val mapView = applier.mapView
-            val marker = Marker(mapView)
-            marker.position = state.geoPoint
-            mapView.overlayManager.add(marker)
+            val marker = Marker(mapView).apply {
+                position = state.geoPoint
+                rotation = state.rotation
 
-            marker.setVisible(visible)
-            marker.rotation = state.rotation
-
-            if (icon != null) {
-                marker.icon = icon
+                setVisible(visible)
+                icon?.let { this.icon = it }
+                id?.let { this.id = it }
             }
+
+            mapView.overlayManager.add(marker)
 
             val composeView = ComposeView(context)
                 .apply {
