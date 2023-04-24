@@ -1,4 +1,39 @@
-site_name: My Docs
+site_name: OpenStreetMap for Android Compose
 
 theme:
   name: material
+  features:
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+repo_name: utsmannn/osm-android-compose
+repo_url: https://github.com/utsmannn/osm-android-compose
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Usage:
+      - Maps Node: usage.md

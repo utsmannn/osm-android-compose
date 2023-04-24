@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +31,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.utsman.osmandcompose.MapProperties
 import com.utsman.osmandcompose.Marker
 import com.utsman.osmandcompose.OpenStreetMap
@@ -39,6 +45,9 @@ import com.utsman.osmandcompose.ZoomButtonVisibility
 import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.rememberMarkerState
 import com.utsman.osmandcompose.rememberOverlayManagerState
+import com.utsman.osmapp.navigation.LocalNavigation
+import com.utsman.osmapp.navigation.Navigation
+import com.utsman.osmapp.navigation.Route
 import com.utsman.osmapp.ui.theme.OsmAndroidComposeTheme
 import org.osmdroid.tileprovider.MapTileProviderBasic
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase
@@ -58,7 +67,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MarkerPage()
+                    val navHostController = rememberNavController()
+
+                    val navigation = remember {
+                        Navigation(navHostController)
+                    }
+
+                    CompositionLocalProvider(LocalNavigation provides navigation) {
+                        MainGraph(navHostController = navHostController)
+                    }
                 }
             }
         }
@@ -66,7 +83,57 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MarkerPage() {
+fun MainGraph(
+    navHostController: NavHostController
+) {
+
+    NavHost(navController = navHostController, startDestination = Route.Main.routeArg) {
+        composable(route = Route.Main.routeArg) {
+            Main()
+        }
+
+        composable(route = Route.Simple.routeArg) {
+            SimplePage()
+        }
+
+        composable(route = Route.Marker.routeArg) {
+            MarkerPage()
+        }
+    }
+}
+
+@Composable
+fun Main() {
+
+    val navigation = LocalNavigation.current
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = {
+            navigation.goToSimpleNode()
+        }) {
+            Text(text = "Simple maps")
+        }
+
+        Button(onClick = {
+            navigation.goToMarker()
+        }) {
+            Text(text = "Marker")
+        }
+
+        Button(onClick = {
+            //navigation.goToSimpleNode()
+        }) {
+            Text(text = "Polyline")
+        }
+    }
+}
+
+@Composable
+fun MarkerPage1() {
     val depokState = rememberMarkerState(geoPoint = GeoPoint(-6.3970066, 106.8224316))
     val jakartaState = rememberMarkerState(geoPoint = GeoPoint(-6.1907982, 106.8315909))
     val depokState2 = rememberMarkerState(geoPoint = GeoPoint(-6.3729963,106.75806))

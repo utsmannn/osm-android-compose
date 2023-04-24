@@ -60,10 +60,9 @@ dependencies {
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01)
-
     signAllPublications()
 
-    coordinates("tech.utsmankece", "osm-android-compose", "0.0.4")
+    coordinates("tech.utsmankece", "osm-android-compose", "0.0.5")
 
     pom {
         name = "OpenStreetMap Android Compose"
