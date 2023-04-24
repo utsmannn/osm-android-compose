@@ -99,6 +99,14 @@ fun MainGraph(
         composable(route = Route.Marker.routeArg) {
             MarkerPage()
         }
+
+        composable(route = Route.Polyline.routeArg) {
+            PolylinePage()
+        }
+
+        composable(route = Route.Polygon.routeArg) {
+            PolygonPage()
+        }
     }
 }
 
@@ -125,12 +133,23 @@ fun Main() {
         }
 
         Button(onClick = {
-            //navigation.goToSimpleNode()
+            navigation.goToPolyline()
         }) {
             Text(text = "Polyline")
         }
+
+        Button(onClick = {
+            navigation.goToPolygon()
+        }) {
+            Text(text = "Polygon")
+        }
     }
 }
+
+
+/**
+ * Playground
+ * */
 
 @Composable
 fun MarkerPage1() {

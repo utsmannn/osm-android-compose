@@ -31,9 +31,17 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - def_list
+
+plugins:
+  - glightbox
 
 nav:
   - Home: index.md
   - Getting started: getting-started.md
   - Usage:
       - Maps Node: usage.md
+      - Marker: marker.md
+      - Polyline and polygon: polyline-polygon.md
