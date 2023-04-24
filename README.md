@@ -1,165 +1,29 @@
 # OpenStreetMap Android Compose
 
-[//]: # (## Load Map)
+For install and usage, please check [documentation](https://utsmannn.github.io/osm-android-compose/)
 
-[//]: # (```kotlin)
+# Welcome
 
-[//]: # (OpenStreetMap&#40;)
+The origin OpenStreetMaps Android visit [https://osmdroid.github.io/osmdroid/](https://osmdroid.github.io/osmdroid/) or [github wiki](https://github.com/osmdroid/osmdroid/wiki)
 
-[//]: # (    modifier = Modifier.fillMaxSize&#40;&#41;,)
+This is a simple OpenStreetMap library for Android Compose. There are several basic functions commonly used, such as markers, polylines, and polygons. You can also add custom tiles. For more details, please refer to the sample project.
 
-[//]: # (    cameraState = cameraState,)
+## Contributing
+This library may not always be maintained, and I am open to anyone who wants to contribute by reporting bugs, making pull requests, or requesting new features in the future.
 
-[//]: # (    overlayManagerState = overlayManagerState,)
+## License
+```
+Copyright 2023 Muhammad Utsman
 
-[//]: # (    properties = mapProperties,)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-[//]: # (    onMapClick = {)
-
-[//]: # (        println&#40;"on click  -> $it"&#41;)
-
-[//]: # (    },)
-
-[//]: # (    onMapLongClick = {)
-
-[//]: # (        depokState.geoPoint = it)
-
-[//]: # (        println&#40;"on long click -> ${it.latitude}, ${it.longitude}"&#41;)
-
-[//]: # ()
-[//]: # (    },)
-
-[//]: # (    onFirstLoadListener = {)
-
-[//]: # (        println&#40;"on loaded ... "&#41;)
-
-[//]: # (    })
-
-[//]: # (&#41;)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (## Marker)
-
-[//]: # (```kotlin)
-
-[//]: # (OpenStreetMap&#40;)
-
-[//]: # (    modifier = Modifier.fillMaxSize&#40;&#41;,)
-
-[//]: # (    cameraState = cameraState)
-
-[//]: # (&#41; {)
-
-[//]: # (    Marker&#40;)
-
-[//]: # (        state = depokState,)
-
-[//]: # (        icon = depokIcon,)
-
-[//]: # (        title = "Depok",)
-
-[//]: # (        snippet = "Kota Depok")
-
-[//]: # (    &#41; {)
-
-[//]: # (        // info window &#40;optional&#41;)
-
-[//]: # (        Column&#40;)
-
-[//]: # (            modifier = Modifier)
-
-[//]: # (                .size&#40;100.dp&#41;)
-
-[//]: # (                .background&#40;color = Color.Gray, shape = RoundedCornerShape&#40;12.dp&#41;&#41;)
-
-[//]: # (        &#41; {)
-
-[//]: # (            Text&#40;text = it.title&#41;)
-
-[//]: # (            Text&#40;text = it.snippet&#41;)
-
-[//]: # (        })
-
-[//]: # (    })
-
-[//]: # (})
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (### Polyline)
-
-[//]: # (```kotlin)
-
-[//]: # (OpenStreetMap&#40;)
-
-[//]: # (    modifier = Modifier.fillMaxSize&#40;&#41;,)
-
-[//]: # (    cameraState = cameraState)
-
-[//]: # (&#41; {)
-
-[//]: # (    Polyline&#40;)
-
-[//]: # (        geoPoints = points,)
-
-[//]: # (        color = Color.Cyan,)
-
-[//]: # (        cap = PolylineCap.ROUND)
-
-[//]: # (    &#41; {)
-
-[//]: # (        // info window &#40;optional&#41;)
-
-[//]: # (        Column&#40;)
-
-[//]: # (            modifier = Modifier)
-
-[//]: # (                .size&#40;100.dp&#41;)
-
-[//]: # (                .background&#40;color = Color.Red, shape = RoundedCornerShape&#40;6.dp&#41;&#41;)
-
-[//]: # (        &#41; {)
-
-[//]: # (            Text&#40;text = it.title&#41;)
-
-[//]: # (            Text&#40;text = it.snippet&#41;)
-
-[//]: # (        })
-
-[//]: # (    })
-
-[//]: # (})
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (### Polygon)
-
-[//]: # (```kotlin)
-
-[//]: # (OpenStreetMap&#40;)
-
-[//]: # (    modifier = Modifier.fillMaxSize&#40;&#41;,)
-
-[//]: # (    cameraState = cameraState)
-
-[//]: # (&#41; {)
-
-[//]: # (    Polygon&#40;)
-
-[//]: # (        geoPoints = points,)
-
-[//]: # (        color = Color.Blue,)
-
-[//]: # (        outlineColor = Color.Green)
-
-[//]: # (    &#41;)
-
-[//]: # (})
-
-[//]: # (```)
-
-### Under deployment
+     http://www.apache.org/licenses/LICENSE-2.0
+     
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
