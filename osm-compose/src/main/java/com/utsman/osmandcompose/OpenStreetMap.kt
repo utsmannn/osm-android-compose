@@ -85,7 +85,6 @@ enum class ZoomButtonVisibility {
 }
 
 @Composable
-@OsmAndroidComposable
 fun OpenStreetMap(
     modifier: Modifier = Modifier,
     cameraState: CameraState = rememberCameraState(),

@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
@@ -54,4 +56,38 @@ dependencies {
 
     implementation 'org.osmdroid:osmdroid-android:6.1.16'
     implementation 'androidx.interpolator:interpolator:1.0.0'
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.S01)
+
+    signAllPublications()
+
+    coordinates("tech.utsmankece", "osm-android-compose", "0.0.4")
+
+    pom {
+        name = "OpenStreetMap Android Compose"
+        description = "OpenStreetMap for android compose"
+        inceptionYear = "2023"
+        url = "https://github.com/utsmannn/osm-android-compose"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "utsmannn"
+                name = "Utsman Muhammad"
+                url = "https://github.com/utsmannn/"
+            }
+        }
+        scm {
+            url = "https://github.com/utsmannn/osm-android-compose"
+            connection = "scm:git:git://github.com/utsmannn/osm-android-compose.git"
+            developerConnection = "scm:git:ssh://git@github.com/utsmannn/osm-android-compose.git"
+        }
+    }
 }
