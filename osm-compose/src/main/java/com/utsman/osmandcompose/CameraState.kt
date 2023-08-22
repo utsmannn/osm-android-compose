@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.parcelize.Parcelize
 import org.osmdroid.api.IGeoPoint
 import org.osmdroid.api.IMapController
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 
 @Parcelize
@@ -81,6 +82,9 @@ class CameraState(cameraProperty: CameraProperty) {
 
     fun animateTo(point: GeoPoint, pZoom: Double? = null, pSpeed: Long? = null, pOrientation: Float = 0f) =
         getController().animateTo(point, pZoom, pSpeed, pOrientation)
+
+    fun zoomToBoundingBox(boundingBox: BoundingBox, animated: Boolean) =
+        map?.zoomToBoundingBox(boundingBox, animated)
 
     fun animateTo(
         point: GeoPoint,
