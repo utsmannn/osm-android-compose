@@ -1,5 +1,7 @@
 package com.utsman.osmapp
 
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,12 +16,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.utsman.osmandcompose.Marker
+import com.utsman.osmandcompose.MarkerLabeled
 import com.utsman.osmandcompose.OpenStreetMap
+import com.utsman.osmandcompose.model.LabelProperties
 import com.utsman.osmandcompose.rememberCameraState
 import com.utsman.osmandcompose.rememberMarkerState
 
@@ -36,9 +39,25 @@ fun MarkerPage() {
         geoPoint = Coordinates.depok,
         rotation = 90f
     )
+    
+    val jakartaMarkerState = rememberMarkerState(
+        geoPoint = Coordinates.jakarta,
+        rotation = 90f
+    )
 
     val depokIcon: Drawable? by remember {
         mutableStateOf(context.getDrawable(R.drawable.round_eject_24))
+    }
+
+    val jakartaLabelProperties = remember {
+        mutableStateOf(
+            LabelProperties(
+                labelColor = Color.RED,
+                labelTextSize = 40f,
+                labelAlign = Paint.Align.CENTER,
+                labelTextOffset = 30f
+            )
+        )
     }
 
     OpenStreetMap(
@@ -54,7 +73,28 @@ fun MarkerPage() {
             Column(
                 modifier = Modifier
                     .size(100.dp)
-                    .background(color = Color.Gray, shape = RoundedCornerShape(7.dp)),
+                    .background(color = androidx.compose.ui.graphics.Color.Gray, shape = RoundedCornerShape(7.dp)),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = it.title)
+                Text(text = it.snippet, fontSize = 10.sp)
+            }
+        }
+
+
+        MarkerLabeled (
+            state = jakartaMarkerState,
+            icon = depokIcon,
+            title = "Jakarta",
+            snippet = "DKI Jakarta",
+            label = "Jakarta",
+            labelProperties = jakartaLabelProperties.value
+        ){
+            Column(
+                modifier = Modifier
+                    .size(100.dp)
+                    .background(color = androidx.compose.ui.graphics.Color.Gray, shape = RoundedCornerShape(7.dp)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
