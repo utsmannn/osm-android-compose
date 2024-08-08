@@ -17,6 +17,7 @@ class OverlayManagerState(private var _overlayManager: OverlayManager?) {
     private var _mapView: MapView? = null
     fun setMap(mapView: MapView) {
         _overlayManager = mapView.overlayManager
+        _mapView = mapView
     }
 
     fun getMap(): MapView {
