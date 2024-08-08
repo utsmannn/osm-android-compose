@@ -12,7 +12,7 @@ import org.osmdroid.views.overlay.Marker
 
 class MarkerState(geoPoint: GeoPoint = GeoPoint(0.0, 0.0), rotation: Float = 0f) {
     var geoPoint: GeoPoint by mutableStateOf(geoPoint)
-    var rotation: Float by mutableStateOf(0f)
+    var rotation: Float by mutableStateOf(rotation)
 
     private val markerState: MutableState<Marker?> = mutableStateOf(null)
 
